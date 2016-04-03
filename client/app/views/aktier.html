@@ -1,0 +1,24 @@
+<a class="btn btn-primary" href="/#/create/aktier"><span class="glyphicon glyphicon-plus"></span> Skapa aktie</a>
+<br/>
+<table class="table table-striped">
+  <thead>
+    <th>Namn</th>
+    <th>Symbol</th>
+    <th>ISIN</th>
+    <th>Sektor</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="aktie in aktier">
+      <td><a ng-href="/#/aktier/{{ aktie._id }}">{{ aktie.Namn }}</a></td>
+      <td>{{ aktie.Symbol }}</td>
+      <td>{{ aktie.ISIN }}</td>
+      <td>{{ aktie.Sektor }}</td>
+      <td>
+        <div class="button-group">
+          <a ng-href="/#/aktier/{{ aktie._id }}/edit" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span></a>
+          <a ng-href="/#/aktier/{{ aktie._id }}/delete" class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle"></span></a>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
