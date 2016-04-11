@@ -29,21 +29,24 @@ angular
         templateUrl: 'views/aktier.html',
         controller: 'AktierCtrl'
       })
-      .when('/create/movie', {
-        templateUrl: 'views/movie-add.html',
-        controller: 'MovieAddCtrl'
+      .when('/create/aktie', {
+        templateUrl: 'views/aktie-add.html',
+        controller: 'AktieAddCtrl'
       })
-      .when('/movie/:id', {
-        templateUrl: 'views/movie-view.html',
-        controller: 'MovieViewCtrl'
+      .when('/aktier/:id', {
+        templateUrl: 'views/aktie-view.html',
+        controller: 'AktieViewCtrl',
+        controllerAs: 'aktieView'
       })
-      .when('/movie/:id/edit', {
-        templateUrl: 'views/movie-edit.html',
-        controller: 'MovieEditCtrl'
+      .when('/aktier/:id/delete', {
+        templateUrl: 'views/aktie-delete.html',
+        controller: 'AktieDeleteCtrl',
+        controllerAs: 'aktieDelete'
       })
-      .when('/movie/:id/delete', {
-        templateUrl: 'views/movie-delete.html',
-        controller: 'MovieDeleteCtrl'
+      .when('/aktier/:id/edit', {
+        templateUrl: 'views/aktie-edit.html',
+        controller: 'AktieEditCtrl',
+        controllerAs: 'aktieEdit'
       })
       .otherwise({
         redirectTo: '/'
@@ -58,18 +61,4 @@ angular
   })
   .factory('Aktier', function(AktierRestangular) {
     return AktierRestangular.service('aktier');
-  })
-  .directive('youtube', function() {
-    return {
-      restrict: 'E',
-      scope: {
-        src: '='
-      },
-      templateUrl: 'views/youtube.html'
-    };
-  })
-  .filter('trusted', function ($sce) {
-    return function(url) {
-      return $sce.trustAsResourceUrl(url);
-    };
   });
