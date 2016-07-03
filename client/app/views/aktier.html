@@ -8,7 +8,7 @@
     <th>Sektor</th>
   </thead>
   <tbody>
-    <tr ng-repeat="aktie in aktier">
+    <tr ng-repeat="aktie in aktier | orderBy:  'Namn' ">
       <td><a ng-href="/#/aktier/{{ aktie._id }}">{{ aktie.Namn }}</a></td>
       <td>{{ aktie.Symbol }}</td>
       <td>{{ aktie.ISIN }}</td>

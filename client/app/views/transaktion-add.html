@@ -1,0 +1,63 @@
+<form role="form">
+  <div class="form-group">
+    <label class="control-label" for="datum">
+      Datum
+    </label>
+    <input class="form-control" id="datum" ng-model="transaktion.Datum" placeholder="YYYY-MM-DD" type="date"/>
+  </div>
+  <div>
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="typ">
+      Typ
+    </label>
+    <select class="form-control" name="singleSelect" ng-model="transaktion.Typ">
+      <option value="Köp">
+        Köp
+      </option>
+      <option value="Sälj">
+        Sälj
+      </option>
+    </select>
+    <br>
+    </br>
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="namn">
+      Namn
+    </label>
+    <input class="form-control" id="namn" ng-model="transaktion.Namn" placeholder="Namn" type="text"/>
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="symbol">
+      Symbol
+    </label>
+    <input class="form-control" id="symbol" ng-model="transaktion.Symbol" type="text"/>
+    
+    <select id="repeatSelect" name="repeatSelect" ng-model="symboler.repeatSelect">
+      <option ng-repeat="option in symboler.availableOptions" value="{{option.id}}">
+        {{option.name}}
+      </option>
+    </select>
+    
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="antal">
+      Antal
+    </label>
+    <input class="form-control" id="antal" ng-model="transaktion.Antal" type="text"/>
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="Pris">
+      Pris/st
+    </label>
+    <input class="form-control" id="pris" ng-model="transaktion.Pris" type="text"/>
+  </div>
+  <div class="form-group">
+    <label class="control-label" for="Pris">
+      Pris/st
+    </label>
+    <input class="form-control" id="pris" ng-model="transaktion.Pris" type="text"/>
+  </div>
+  <input class="btn btn-primary" ng-click="saveTransaktion()" type="submit" value="Spara"/>
+</form>

@@ -9,12 +9,12 @@
  * Main module of the application.
  */
 angular
-  .module('clientApp', ['ngRoute','restangular'
-  ])
+  .module('clientApp', ['ngRoute','restangular', 'angular.filter', 'ui.bootstrap'
+  ,'ui.calendar'])
   .config(function ($routeProvider, RestangularProvider) {
 
     // Set the base URL for Restangular.
-    RestangularProvider.setBaseUrl('http://localhost:3000');
+    RestangularProvider.setBaseUrl('http://localhost:8080');
 
     $routeProvider
       .when('/', {
@@ -48,6 +48,30 @@ angular
         controller: 'AktieEditCtrl',
         controllerAs: 'aktieEdit'
       })
+      .when('/transaktioner', {
+        templateUrl: 'views/transaktioner.html',
+        controller: 'TransaktionerCtrl'
+      })
+      .when('/transaktion/:id', {
+        templateUrl: 'views/transaktion-view.html',
+        controller: 'TransaktionViewCtrl',
+        controllerAs: 'transaktionView'
+      })
+      .when('/transaktion/:id/edit', {
+        templateUrl: 'views/transaktion-edit.html',
+        controller: 'TransaktionEditCtrl',
+        controllerAs: 'transaktionEdit'
+      })
+      .when('/transaktion/:id/delete', {
+        templateUrl: 'views/transaktion-delete.html',
+        controller: 'TransaktionDeleteCtrl',
+        controllerAs: 'transaktionDelete'
+      })
+      .when('/create/transaktion', {
+        templateUrl: 'views/transaktion-add.html',
+        controller: 'TransaktionAddCtrl',
+        controllerAs: 'transaktionAdd'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -61,4 +85,14 @@ angular
   })
   .factory('Aktier', function(AktierRestangular) {
     return AktierRestangular.service('aktier');
+  })
+  .factory('TransaktionerRestangular', function(Restangular) {
+    return Restangular.withConfig(function(RestangularConfigurer) {
+      RestangularConfigurer.setRestangularFields({
+        id: '_id'
+      });
+    });
+  })
+  .factory('Transaktioner', function(TransaktionerRestangular, Aktier) {
+    return TransaktionerRestangular.service('transaktioner');
   });

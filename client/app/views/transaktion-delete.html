@@ -1,0 +1,7 @@
+<form role="form">
+  <p>Vill du ta bort transaktion {{ transaktion.Datum }}?</p>
+  <div class="form-group">
+    <input type="submit" class="btn btn-danger" ng-click="deleteTransaktion()" value="Yes"/>
+    <button ng-click="back()" type="button" class="btn btn-default">No</button>
+  </div>
+</form>

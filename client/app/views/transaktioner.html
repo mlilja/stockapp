@@ -1,0 +1,30 @@
+<a class="btn btn-primary" href="/#/create/transaktion">
+    <span class="glyphicon glyphicon-plus">
+    </span>
+    Ny transaktion
+</a>
+<br/>
+    <ul ng-repeat="(key, value) in transaktioner | groupBy: 'Namn'">
+        {{ key }}
+        <div >
+            <li ng-repeat="transaktion in value">
+                {{ transaktion.Datum }}
+                {{ transaktion.Typ }}
+                {{ transaktion.Symbol }}
+                {{ transaktion.Antal }}
+                {{ transaktion.Pris }}
+                {{ transaktion.Antal * (transaktion.Pris*1) }}
+            </li>
+        </div>
+        <div class="button-group">
+            <a ng-href="/#/transaktion/{{ transaktion._id }}/edit" class="btn btn-default">
+                <span class="glyphicon glyphicon-edit">
+                </span>
+            </a>
+            <a ng-href="/#/transaktion/{{ transaktion._id }}/delete" class="btn btn-danger">
+                <span class="glyphicon glyphicon-remove-circle">
+                </span>
+            </a>
+        </div>
+    </ul>
+</div>
