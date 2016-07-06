@@ -32,8 +32,6 @@
     <label class="control-label" for="symbol">
       Symbol
     </label>
-    <input class="form-control" id="symbol" ng-model="transaktion.Symbol" type="text"/>
-    
     <select id="repeatSelect" name="repeatSelect" ng-model="symboler.repeatSelect">
       <option ng-repeat="option in symboler.availableOptions" value="{{option.id}}">
         {{option.name}}

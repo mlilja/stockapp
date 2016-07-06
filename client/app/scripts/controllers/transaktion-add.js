@@ -6,35 +6,44 @@
  * # TransaktionAddCtrl
  * Controller of the clientApp
  */
-angular.module('clientApp').controller('TransaktionAddCtrl', function($scope, Transaktioner, Aktier, $location) {
+angular.module('clientApp').controller('TransaktionAddCtrl', function($scope, $q, Transaktioner, Aktier, $location) {
     $scope.transaktion = {};
     $scope.saveTransaktion = function() {
         Transaktioner.post($scope.transaktion).then(function() {
             $location.path('/transaktioner');
         });
     };
-    var log = [];
-    Aktier.getList().then(function(response) {
-        var list = response;
-        angular.forEach(list, function(value, key) {
-            //console.log(value.Symbol);
-            log.push(value.Symbol);
-        }, log);
-        
+    $scope.options = [];
+    $scope.aktier = [];
+    $scope.getSymboler = function(Aktier, callback) {
+        var promise = Aktier.getList().then(function(response) {
+            return callback(response);
+        });
+        return promise;
+    };
+    $scope.getOptions = function( callback) {
+        var prom = $scope.getSymboler(Aktier, function(response) {
+     		var option = {};
+            angular.forEach(response, function(value, key) {
+                option = {
+                    id: key,
+                    name: value.Symbol
+                };
+                $scope.options.push(option);
+            });
+            
+        });
+        $scope.aktier.push(prom);
+
+        $q.all(prom).then(function() {
+            callback();
+        });
+    };
+    $scope.getOptions(function() {
     });
-    console.log(log);
 
     $scope.symboler = {
         repeatSelect: null,
-        availableOptions: [{
-            id: '1',
-            name: 'Option A'
-        }, {
-            id: '2',
-            name: 'Option B'
-        }, {
-            id: '3',
-            name: 'Option C'
-        }],
+        availableOptions: $scope.options
     };
 });
